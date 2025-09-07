@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium - My Discord Bot</title>
+    <style>
+        /* Reset وتنسيقات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: #7289da;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        /* الترويسة */
+        header {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #7289da;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(114, 137, 218, 0.1);
+            color: #7289da;
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* قسم Premium */
+        .premium {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .premium h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #7289da;
+            background: linear-gradient(90deg, #7289da, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .premium-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        /* قسم الميزات */
+        .benefits {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            text-align: left;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .benefits h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .benefit-item {
+            background-color: rgba(30, 30, 30, 0.6);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+
+        .benefit-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #ffd700;
+        }
+
+        .benefit-item p {
+            color: #b0b0b0;
+        }
+
+        /* قسم الأسعار */
+        .pricing {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, #7289da 0%, #5b6eae 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .price-duration {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .price-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .price-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .purchase-button {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #000000;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .purchase-button:hover {
+            background-color: #ffcc00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            color: #000000;
+        }
+
+        /* قسم الأسئلة الشائعة */
+        .faq {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .faq h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .faq-answer {
+            color: #b0b0b0;
+            padding-left: 1rem;
+            border-left: 2px solid #7289da;
+        }
+
+        /* التذييل */
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            color: #b0b0b0;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .benefits, .pricing, .faq {
+                padding: 1.5rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .premium h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits, .pricing, .faq {
+                padding: 1rem;
+            }
+            
+            .price-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">MyBot</a>
+            <ul>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="premium.html">Premium</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="premium">
+            <h2>Premium Membership</h2>
+            <p class="premium-intro">Upgrade your server experience with our premium features. Get access to exclusive tools and enhancements that take your Discord server to the next level.</p>
+            
+            <div class="benefits">
+                <h3>Premium Benefits</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>Priority Support</h4>
+                        <p>Get your questions answered faster with dedicated priority support from our team.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Advanced Analytics</h4>
+                        <p>Access detailed server statistics and member activity reports to better understand your community.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Custom Welcome Messages</h4>
+                        <p>Create personalized welcome messages with custom embeds and variables for new members.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Extended Economy Features</h4>
+                        <p>Unlock additional economy commands, items, and customization options for your server economy.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Auto-Moderation</h4>
+                        <p>Advanced auto-moderation tools to automatically handle spam, bad words, and other rule violations.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Custom Commands</h4>
+                        <p>Create your own custom commands with responses, embeds, and variables tailored to your server.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing">
+                <h3>Pricing Plans</h3>
+                <div class="price-card">
+                    <div class="price-amount">$5</div>
+                    <div class="price-duration">per month per server</div>
+                    <ul class="price-features">
+                        <li>All Premium Features</li>
+                        <li>Priority Support</li>
+                        <li>Customization Options</li>
+                        <li>Regular Updates</li>
+                        <li>7-Day Money Back Guarantee</li>
+                  </ul>
+<a href="https://ko-fi.com/rezoxoff" class="purchase-button" target="_blank">Purchase Premium (if u want help developer click here)</a>
+</div>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">How do I upgrade to Premium?</div>
+                    <div class="faq-answer">Click the purchase button above and follow the instructions. You'll need to authorize the payment and select which server you want to upgrade.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I use Premium on multiple servers?</div>
+                    <div class="faq-answer">Premium is applied per server. You'll need to purchase a separate plan for each server you want to upgrade.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is there a free trial?</div>
+                    <div class="faq-answer">We don't offer a free trial, but we provide a 7-day money-back guarantee if you're not satisfied with the premium features.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I cancel my subscription?</div>
+                    <div class="faq-answer">You can cancel your subscription at any time through the dashboard. Your premium features will remain active until the end of your billing period.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MyBot. All rights reserved.</p>
+    </footer>
+</body>
+</html>

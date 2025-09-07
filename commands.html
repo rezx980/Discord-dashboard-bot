@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands - My Discord Bot</title>
+    <style>
+        /* Reset وتنسيقات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #7289da;
+        }
+
+        /* الترويسة */
+        header {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #7289da;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(114, 137, 218, 0.1);
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* قسم الأوامر */
+        .commands {
+            padding: 2rem 0;
+        }
+
+        .commands h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #7289da;
+        }
+
+        #command-search {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto 2.5rem;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background-color: #1e1e1e;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        #command-search:focus {
+            outline: none;
+            box-shadow: 0 4px 12px rgba(114, 137, 218, 0.3);
+        }
+
+        #command-search::placeholder {
+            color: #b0b0b0;
+        }
+
+        .command-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .command-list h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #7289da;
+            color: #7289da;
+        }
+
+        .command-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 1rem;
+        }
+
+        .command-list li {
+            background-color: #1e1e1e;
+            padding: 1.2rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .command-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .command-list code {
+            background-color: #2d2d2d;
+            color: #7289da;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* التذييل */
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            color: #b0b0b0;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .command-list ul {
+                grid-template-columns: 1fr;
+            }
+            
+            .command-list li {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .commands h2 {
+                font-size: 2rem;
+            }
+            
+            .command-list h3 {
+                font-size: 1.5rem;
+            }
+            
+            #command-search {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">MyBot</a>
+            <ul>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="premium.html">Premium</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="commands">
+            <h2>Bot Commands</h2>
+            <input type="text" id="command-search" placeholder="Search commands...">
+            <div class="command-list">
+                <h3>Moderation</h3>
+                <ul>
+                    <li><code>!kick @user [reason]</code> - Kicks a user from the server.</li>
+                    <li><code>!ban @user [reason]</code> - Bans a user from the server.</li>
+                    <li><code>!mute @user [duration]</code> - Mutes a user.</li>
+                    <li><code>!warn @user [reason]</code> - Warns a user.</li>
+                </ul>
+
+                <h3>Economy (Optional)</h3>
+                <ul>
+                    <li><code>!balance</code> - Checks your balance.</li>
+                    <li><code>!deposit [amount]</code> - Deposits money into your account.</li>
+                    <li><code>!withdraw [amount]</code> - Withdraws money from your account.</li>
+                    <li><code>!give @user [amount]</code> - Gives money to another user.</li>
+                </ul>
+
+                <h3>General</h3>
+                <ul>
+                    <li><code>!ping</code> - Checks the bot's latency.</li>
+                    <li><code>!help</code> - Displays a list of commands.</li>
+                    <li><code>!serverinfo</code> - Displays information about the server.</li>
+                    <li><code>!userinfo @user</code> - Displays information about a user.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MyBot. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // وظيفة البحث في الأوامر
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('command-search');
+            const commandItems = document.querySelectorAll('.command-list li');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                commandItems.forEach(function(item) {
+                    const commandText = item.textContent.toLowerCase();
+                    if (commandText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // إظهار العناوين فقط إذا كانت هناك أوامر مطابقة ضمنها
+                const categories = document.querySelectorAll('.command-list > h3');
+                categories.forEach(function(category) {
+                    const categoryCommands = category.nextElementSibling;
+                    const visibleCommands = categoryCommands.querySelectorAll('li[style="display: block"]');
+                    
+                    if (visibleCommands.length > 0) {
+                        category.style.display = 'block';
+                        categoryCommands.style.display = 'grid';
+                    } else {
+                        category.style.display = 'none';
+                        categoryCommands.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

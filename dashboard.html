@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - My Discord Bot</title>
+    <style>
+        /* Reset وتنسيقات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #7289da;
+        }
+
+        /* الترويسة */
+        header {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #7289da;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(114, 137, 218, 0.1);
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* قسم Dashboard */
+        .dashboard {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .dashboard h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #7289da;
+        }
+
+        .dashboard > p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #b0b0b0;
+        }
+
+        .login-with-discord-button {
+            display: inline-block;
+            background-color: #7289da;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        .login-with-discord-button:hover {
+            background-color: #5b6eae;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        /* إعدادات السيرفر */
+        .server-settings {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .server-settings h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #7289da;
+            text-align: center;
+        }
+
+        .server-settings > p {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+        }
+
+        .server-settings h4 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: #7289da;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #7289da;
+        }
+
+        .settings-group {
+            background-color: rgba(30, 30, 30, 0.6);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        select, 
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #2d2d2d;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+
+        .checkbox-group {
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: #7289da;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #5b6eae;
+        }
+
+        /* التذييل */
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            color: #b0b0b0;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .server-settings {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .dashboard h2 {
+                font-size: 2rem;
+            }
+            
+            .server-settings {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">MyBot</a>
+            <ul>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="premium.html">Premium</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="dashboard">
+            <h2>Server Dashboard</h2>
+            <p>Login with Discord to manage your server settings.</p>
+            <a href="#" class="login-with-discord-button">Login with Discord</a>
+
+            <!-- After successful login, display server settings here -->
+            <div class="server-settings">
+                <h3>Server Name</h3>
+                <p>Welcome to your server dashboard. Customize your server settings below.</p>
+
+                <div class="settings-group">
+                    <h4>Moderation Settings</h4>
+                    
+                    <label for="welcome-message">Welcome Message:</label>
+                    <input type="text" id="welcome-message" value="Welcome to the server!">
+                    
+                    <label for="goodbye-message">Goodbye Message:</label>
+                    <input type="text" id="goodbye-message" value="Goodbye! We'll miss you!">
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="auto-mod" checked>
+                        <label for="auto-mod">Enable Auto Moderation</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="anti-spam" checked>
+                        <label for="anti-spam">Enable Anti-Spam Protection</label>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h4>Economy Settings</h4>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="enable-economy">
+                        <label for="enable-economy">Enable Economy System</label>
+                    </div>
+                    
+                    <label for="starting-balance">Starting Balance:</label>
+                    <input type="number" id="starting-balance" value="100">
+                    
+                    <label for="daily-reward">Daily Reward Amount:</label>
+                    <input type="number" id="daily-reward" value="50">
+                </div>
+
+                <div class="settings-group">
+                    <h4>Logging Settings</h4>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="log-moderation">
+                        <label for="log-moderation">Log Moderation Actions</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="log-messages">
+                        <label for="log-messages">Log Message Deletions/Edits</label>
+                    </div>
+                    
+                    <label for="log-channel">Log Channel ID:</label>
+                    <input type="text" id="log-channel" placeholder="Enter channel ID">
+                </div>
+
+                <button>Save Changes</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MyBot. All rights reserved.</p>
+    </footer>
+    <script>
+        const loginButton = document.querySelector('.login-with-discord-button');
+        const serverSettings = document.querySelector('.server-settings');
+
+        loginButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            // Simulate a successful login. In real implementation, handle the OAuth2 flow.
+            alert("Simulated Login Successful!");
+            loginButton.style.display = 'none';
+            serverSettings.style.display = 'block'; // Show the server settings
+        });
+
+        // Add some interactivity to the settings
+        const enableEconomy = document.getElementById('enable-economy');
+        const economySettings = document.querySelectorAll('#starting-balance, #daily-reward');
+        
+        function toggleEconomySettings() {
+            economySettings.forEach(setting => {
+                setting.disabled = !enableEconomy.checked;
+            });
+        }
+        
+        enableEconomy.addEventListener('change', toggleEconomySettings);
+        toggleEconomySettings(); // Initialize on page load
+    </script>
+</body>
+</html>
